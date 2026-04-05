@@ -2,166 +2,208 @@
 
 > **Unscramble. Learn. Compete.**
 
-A full-stack word scramble game with authentication, leaderboards, progress tracking, and gamification features.
+---
+
+## 🧠 What This Project Does (Plain English)
+
+Word Scramble is an online word game where letters of a word are shuffled up, and your job is to put them back in the right order — before the timer runs out!
+
+Think of it as a tool that:
+
+- **Takes in** a category and difficulty you choose (like "Technology" on "Hard")
+- **Shows you** a scrambled word with a ticking countdown timer
+- **Gives back** your score, tells you if you were right, and tracks your progress over time
+
+You can play against yourself, climb the global leaderboard, and see how you improve over time — all inside a slick, dark-themed web app.
 
 ---
 
-## 🚀 Quick Start
+## ✨ Key Features
 
-### Prerequisites
-- Node.js 18+
-- A [Neon](https://console.neon.tech) PostgreSQL database (free tier works)
+🔹 **Word Scramble Gameplay** — Unscramble 10 words per game with a live countdown timer
+🔹 **Drag & Click Tiles** — Build your answer by dragging or clicking letter tiles (or just type it)
+🔹 **4 Categories** — General, Technology, Sports, Science
+🔹 **3 Difficulty Levels** — Easy (4–5 letters), Medium (6–8 letters), Hard (9+ letters)
+🔹 **Hints & Skips** — Use hints when stuck; skip words you can't crack
+🔹 **Smart Scoring** — Points based on speed and difficulty
+🔹 **No Repeated Words** — Fresh set of words every game in the same category
+🔹 **Sound Effects** — Audio feedback for correct/wrong answers and ticking timer
+🔹 **Leaderboard** — See where you rank globally
+🔹 **Progress Dashboard** — Charts showing your scores and accuracy over time
+🔹 **User Accounts** — Register, log in, update your profile
 
-### 1. Clone & Install
+---
+
+## ⚙️ How It Works
+
+1. You **register or log in** to your account
+2. On the Play page, **choose a category** (e.g. Science) and a **difficulty** (e.g. Medium)
+3. The game loads **10 scrambled words** — each on a timer
+4. You **drag tiles** or **type** your answer and hit Submit
+5. Get it right → points added, move to the next word
+6. Wrong or time's up → the correct answer is shown, then move on
+7. After 10 words → see your final score, accuracy, and a word-by-word review
+8. Your results are **saved to the leaderboard and your progress dashboard**
+
+---
+
+## 🚀 How to Use It
+
+### Step 1: Setup
+
+Clone the repository:
 
 ```bash
-cd "word scramble"
+git clone https://github.com/muditkapoor07/word-scramble.git
+cd word-scramble
+```
+
+Install all dependencies (frontend + backend in one command):
+
+```bash
 npm run install:all
 ```
 
-### 2. Configure Environment
+### Step 2: Configure Environment
 
 ```bash
 cp .env.example server/.env
 ```
 
-Edit `server/.env` and fill in:
+Open `server/.env` and fill in your values:
 
 ```env
-DATABASE_URL=postgresql://user:pass@ep-xxx.us-east-2.aws.neon.tech/neondb?sslmode=require
-JWT_SECRET=your-random-secret-string-at-least-32-chars
-PORT=5000
-CLIENT_URL=http://localhost:5173
+DATABASE_URL=postgresql://user:pass@your-neon-host/neondb?sslmode=require
+JWT_SECRET=any-long-random-string-at-least-32-characters
+PORT=5001
+CLIENT_URL=http://localhost:5174
 ```
 
-> Get your `DATABASE_URL` from your [Neon dashboard](https://console.neon.tech) → Connection string.
+> 💡 Get a free `DATABASE_URL` from [neon.tech](https://neon.tech) → create a project → copy the connection string.
 
-### 3. Initialize Database
-
-The database tables are created automatically on first request. Or run manually:
+### Step 3: Start the App
 
 ```bash
-cd server && node db/setup.js
-```
-
-### 4. Start Development
-
-```bash
-# From root directory — starts both server and client:
 npm run dev
 ```
 
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:5000/api
+This starts both the backend and frontend together.
+
+- **App (Frontend):** http://localhost:5174
+- **API (Backend):** http://localhost:5001/api
+
+### Step 4: Play!
+
+1. Open http://localhost:5174 in your browser
+2. Click **Get Started** to register an account
+3. Go to **Play**, pick a category and difficulty
+4. Hit **Start Game** and unscramble away!
 
 ---
 
-## 📁 Project Structure
+## 🧩 Example Usage
+
+You select **Technology** + **Hard** difficulty and start a game.
+
+- The game shows you: `TMOIAGRLH`
+- You drag the tiles to spell: `ALGORITHM`
+- ✅ Correct! You earn points based on how fast you answered
+- After 10 words, your score is saved and you appear on the leaderboard
+
+---
+
+## 🛠️ Configuration
+
+All configuration lives in `server/.env`:
+
+| Variable | What it does |
+|----------|-------------|
+| `DATABASE_URL` | Your Neon PostgreSQL connection string |
+| `JWT_SECRET` | Secret key used to sign login tokens (keep this private) |
+| `PORT` | Port the backend runs on (default: 5001) |
+| `CLIENT_URL` | URL of the frontend (used for security settings) |
+
+For production (e.g. Render), also set `VITE_API_URL` on the frontend:
+
+```env
+VITE_API_URL=https://your-backend.onrender.com/api
+```
+
+---
+
+## 📂 Project Structure
 
 ```
 word-scramble/
-├── server/                 # Node.js + Express backend
-│   ├── index.js            # Server entry point
-│   ├── db.js               # Neon database connection + schema
-│   ├── middleware/
-│   │   └── auth.js         # JWT authentication middleware
-│   ├── routes/
-│   │   ├── auth.js         # Register / Login / Me
-│   │   ├── game.js         # Words, submit, hints
-│   │   ├── leaderboard.js  # Global rankings
-│   │   ├── progress.js     # User stats & charts
-│   │   └── profile.js      # Profile view & update
-│   └── data/
-│       └── words.js        # 240+ words across 4 categories × 3 difficulties
 │
-└── client/                 # React + Vite frontend
-    └── src/
-        ├── App.jsx          # Router + auth guard
-        ├── index.css        # Complete design system (blue/purple theme)
-        ├── context/
-        │   └── AuthContext.jsx
-        ├── pages/
-        │   ├── Landing.jsx   # Public marketing page
-        │   ├── Login.jsx
-        │   ├── Register.jsx
-        │   ├── Game.jsx      # Full game with timer, hints, sounds
-        │   ├── Progress.jsx  # Charts & stats dashboard
-        │   ├── Leaderboard.jsx
-        │   └── Profile.jsx
-        └── components/
-            └── Navbar.jsx
+├── server/                   # Backend — Node.js + Express
+│   ├── index.js              # Server entry point
+│   ├── db.js                 # Database connection & table setup
+│   ├── middleware/
+│   │   └── auth.js           # Login/token checking
+│   ├── routes/
+│   │   ├── auth.js           # Register & Login
+│   │   ├── game.js           # Game logic (words, scoring, hints)
+│   │   ├── leaderboard.js    # Global rankings
+│   │   ├── progress.js       # Your stats over time
+│   │   └── profile.js        # View & edit your profile
+│   └── data/
+│       └── words.js          # 180 words across 4 categories × 3 difficulties
+│
+├── client/                   # Frontend — React + Vite
+│   └── src/
+│       ├── pages/
+│       │   ├── Landing.jsx   # Home/marketing page
+│       │   ├── Login.jsx     # Sign in
+│       │   ├── Register.jsx  # Create account
+│       │   ├── Game.jsx      # The actual game
+│       │   ├── Progress.jsx  # Your stats & charts
+│       │   ├── Leaderboard.jsx
+│       │   └── Profile.jsx
+│       ├── context/
+│       │   └── AuthContext.jsx  # Keeps you logged in across pages
+│       └── components/
+│           └── Navbar.jsx
+│
+├── package.json              # Root scripts (run both server + client)
+├── .env.example              # Template for your environment variables
+└── README.md                 # This file
 ```
 
 ---
 
-## 🎮 Features
+## 💡 Who Is This For?
 
-| Feature | Details |
-|---------|---------|
-| **Authentication** | JWT-based, password hashing with bcryptjs |
-| **Gameplay** | 10 words/game, 30s timer, instant feedback |
-| **Sound Effects** | Web Audio API (correct/wrong/tick) |
-| **Confetti** | Fires on ≥70% accuracy |
-| **Hints** | 2 hints/day, stored in DB |
-| **Skip** | 3 skips per game |
-| **Scoring** | +10 base, +1–5 time bonus, ×1.5 medium, ×2 hard |
-| **Categories** | General, Technology, Sports, Science |
-| **Difficulties** | Easy (4-5 letters), Medium (6-8), Hard (9+) |
-| **Leaderboard** | Global rankings with podium display |
-| **Progress** | Bar, pie, and line charts via Recharts |
-| **Local Backup** | Last 20 games saved to localStorage |
-| **Responsive** | Mobile + desktop, hamburger menu |
+- **Students** who want to improve vocabulary in a fun way
+- **Developers** looking for a full-stack project example with auth, database, and charts
+- **Beginners** who want to see how a real React + Node.js app is built end to end
+- **Anyone** who enjoys word games!
 
 ---
 
-## 🗄️ Database Schema
+## ⚠️ Notes
 
-```sql
-users         (id, name, email, password_hash, avatar_url, created_at)
-games         (id, user_id, category, difficulty, total_score, correct_answers, total_questions, played_at)
-scores        (id, user_id, game_id, word, result, time_taken, score, category, difficulty, created_at)
-hints_usage   (id, user_id, usage_date, hints_used)
-```
+- Make sure **Node.js 18 or higher** is installed
+- You need a free [Neon](https://neon.tech) account for the database — no credit card required
+- The database tables are created **automatically** when the server starts for the first time
+- Keep your `JWT_SECRET` and `DATABASE_URL` private — never commit them to GitHub
 
 ---
 
-## 🌐 API Endpoints
+## 🌐 Live Demo
 
-| Method | Path | Auth | Description |
-|--------|------|------|-------------|
-| POST | `/api/auth/register` | No | Create account |
-| POST | `/api/auth/login` | No | Login |
-| GET | `/api/auth/me` | Yes | Current user |
-| GET | `/api/game/word` | Yes | Get scrambled word |
-| POST | `/api/game/start` | Yes | Start game session |
-| POST | `/api/game/submit` | Yes | Submit answer |
-| POST | `/api/game/hint` | Yes | Use a hint |
-| GET | `/api/game/hint-status` | Yes | Hints remaining today |
-| GET | `/api/leaderboard` | Yes | Global rankings |
-| GET | `/api/progress` | Yes | User stats |
-| GET | `/api/profile` | Yes | Profile data |
-| PUT | `/api/profile` | Yes | Update profile |
+- **Frontend:** https://word-scramble-static.onrender.com
+- **Backend API:** https://word-scramble-04sa.onrender.com/api/health
 
 ---
 
-## 🚢 Deployment
+## 📌 Summary
 
-### Backend (e.g., Railway, Render, Fly.io)
-1. Set all environment variables from `.env.example`
-2. Deploy `server/` directory
-3. Start command: `node index.js`
+Word Scramble helps you exercise your brain and vocabulary by:
 
-### Frontend (e.g., Vercel, Netlify)
-1. Build: `cd client && npm run build`
-2. Publish directory: `client/dist`
-3. Set `VITE_API_URL` if backend is on different domain and update `vite.config.js` proxy accordingly
+- Making word puzzles fun and competitive
+- Tracking your improvement with charts
+- Letting you race against a timer for extra challenge
+- Saving your scores so you can beat your own record
 
----
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React 18, Vite, React Router v6, Recharts, react-confetti, Axios
-- **Backend**: Node.js, Express
-- **Database**: Neon (PostgreSQL) via `@neondatabase/serverless`
-- **Auth**: JWT + bcryptjs
-- **Styling**: Pure CSS (no framework) with CSS custom properties
+**Stack:** React · Vite · Node.js · Express · PostgreSQL (Neon) · JWT Auth
