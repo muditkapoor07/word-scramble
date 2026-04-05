@@ -20,17 +20,30 @@ You can play against yourself, climb the global leaderboard, and see how you imp
 
 ## ✨ Key Features
 
-🔹 **Word Scramble Gameplay** — Unscramble 10 words per game with a live countdown timer
-🔹 **Drag & Click Tiles** — Build your answer by dragging or clicking letter tiles (or just type it)
-🔹 **4 Categories** — General, Technology, Sports, Science
-🔹 **3 Difficulty Levels** — Easy (4–5 letters), Medium (6–8 letters), Hard (9+ letters)
-🔹 **Hints & Skips** — Use hints when stuck; skip words you can't crack
-🔹 **Smart Scoring** — Points based on speed and difficulty
-🔹 **No Repeated Words** — Fresh set of words every game in the same category
-🔹 **Sound Effects** — Audio feedback for correct/wrong answers and ticking timer
-🔹 **Leaderboard** — See where you rank globally
-🔹 **Progress Dashboard** — Charts showing your scores and accuracy over time
-🔹 **User Accounts** — Register, log in, update your profile
+### 🎮 Gameplay
+| Feature | Details |
+|---|---|
+| 🔤 Word Scramble | Unscramble 10 words per game with a live countdown timer |
+| 🧩 Drag & Click Tiles | Build your answer by dragging or clicking letter tiles — or just type it |
+| 🔁 No Repeated Words | Fresh set of words every game in the same category |
+| 🔊 Sound Effects | Audio feedback for correct/wrong answers and the ticking timer |
+
+### 📚 Categories & Difficulty
+| Category | Difficulty | Word Length |
+|---|---|---|
+| 📖 General | 🌱 Easy | 4–5 letters |
+| 💻 Technology | ⚡ Medium | 6–8 letters |
+| ⚽ Sports | 🔥 Hard | 9+ letters |
+| 🔬 Science | | |
+
+### 🏆 Scoring & Progress
+| Feature | Details |
+|---|---|
+| 💡 Hints & Skips | Use hints when stuck; 3 skips allowed per game |
+| ⭐ Smart Scoring | Points based on how fast you answer and how hard the difficulty is |
+| 🥇 Leaderboard | See where you rank against all players globally |
+| 📊 Progress Dashboard | Charts showing your scores and accuracy over time |
+| 👤 User Accounts | Register, log in, and update your profile |
 
 ---
 
